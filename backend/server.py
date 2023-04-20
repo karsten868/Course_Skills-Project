@@ -1,9 +1,17 @@
 from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 import json
 app=Flask(__name__)
 
 #global variable holder 
 holder= {}
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:peacelove@localhost/course_database'
+
+db = SQLAlchemy(app)
+
+db.init_app(app)
+db.create_all(app=app)
 
 
 @app.route("/test", methods=['GET'])
